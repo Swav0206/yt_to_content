@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+langchain
+langchain-groq
+langchain-core
+youtube-transcript-api
+python-dotenv
+pydantic
+httpx
