@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import UrlInput from "./components/UrlInput";
 import LoadingState from "./components/LoadingState";
 import OutputPanel from "./components/OutputPanel";
-import { generateBlog, generateLinkedIn, generateTwitter } from "./api";
+import { generateBlog, generateLinkedIn, generateTwitter, generateYTShort, generateTedTalk } from "./api";
 
 // Feature cards for the hero section
 const FEATURES = [
@@ -53,6 +53,10 @@ export default function App() {
         ? await generateBlog(url, language)
         : mode === "twitter"
         ? await generateTwitter(url, language)
+        : mode === "ytshort"
+        ? await generateYTShort(url, language)
+        : mode === "tedtalk"
+        ? await generateTedTalk(url, language)
         : await generateLinkedIn(url, language);
       setResult(data);
     } catch (err) {

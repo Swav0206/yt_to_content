@@ -39,6 +39,8 @@ export default function UrlInput({ onGenerate, isLoading }) {
             { id: "blog", label: "Blog Post", icon: "M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" },
             { id: "linkedin", label: "LinkedIn Post", icon: "M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z M4 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" },
             { id: "twitter", label: "Twitter Post", icon: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" },
+            { id: "ytshort", label: "YT Short", icon: "M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" },
+            { id: "tedtalk", label: "TED Talk", icon: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -68,6 +70,12 @@ export default function UrlInput({ onGenerate, isLoading }) {
             <option value="German">🇩🇪 German</option>
             <option value="Hindi">🇮🇳 Hindi</option>
             <option value="Mandarin Chinese">🇨🇳 Mandarin</option>
+            <option value="Portuguese">🇵🇹 Portuguese</option>
+            <option value="Italian">🇮🇹 Italian</option>
+            <option value="Japanese">🇯🇵 Japanese</option>
+            <option value="Korean">🇰🇷 Korean</option>
+            <option value="Arabic">🇸🇦 Arabic</option>
+            <option value="Russian">🇷🇺 Russian</option>
           </select>
           <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -120,7 +128,7 @@ export default function UrlInput({ onGenerate, isLoading }) {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
                 </svg>
-                Generate {mode === "blog" ? "Blog" : mode === "twitter" ? "Thread" : "Post"}
+                Generate {mode === "blog" ? "Blog" : mode === "twitter" ? "Thread" : mode === "ytshort" ? "YT Short" : "Post"}
               </>
             )}
           </button>
@@ -135,23 +143,7 @@ export default function UrlInput({ onGenerate, isLoading }) {
         )}
       </form>
 
-      {/* Examples */}
-      <div className="mt-5 flex items-center gap-2 flex-wrap">
-        <span className="text-xs text-slate-500">Try:</span>
-        {[
-          { label: "YT Short", url: "https://www.youtube.com/shorts/DnPTHuqBEa8" },
-          { label: "TED Talk", url: "https://www.youtube.com/watch?v=8S0FDjFBj8o" },
-        ].map(ex => (
-          <button
-            key={ex.label}
-            onClick={() => { setUrl(ex.url); setUrlError(""); onGenerate(ex.url, mode, language); }}
-            className="text-xs px-3 py-1 rounded-lg border border-white/10 text-slate-400 hover:text-slate-200 hover:border-violet-500/40 transition-all duration-200"
-            disabled={isLoading}
-          >
-            {ex.label}
-          </button>
-        ))}
-      </div>
+
     </div>
   );
 }

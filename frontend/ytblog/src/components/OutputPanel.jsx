@@ -54,9 +54,11 @@ function renderInline(text) {
 export default function OutputPanel({ result, mode, onReset }) {
   const [copied, setCopied] = useState(false);
 
-  const content = mode === "blog" ? result.blog_post : mode === "twitter" ? result.twitter_post : result.linkedin_post;
+  const content = mode === "blog" ? result.blog_post : mode === "twitter" ? result.twitter_post : mode === "ytshort" ? result.ytshort_post : mode === "tedtalk" ? result.tedtalk_post : result.linkedin_post;
   const isBlog = mode === "blog";
   const isTwitter = mode === "twitter";
+  const isYTShort = mode === "ytshort";
+  const isTedTalk = mode === "tedtalk";
 
   function handleCopy() {
     navigator.clipboard.writeText(content).then(() => {
@@ -72,7 +74,7 @@ export default function OutputPanel({ result, mode, onReset }) {
         style={{ borderBottom: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.03)' }}>
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg flex items-center justify-center"
-            style={{ background: isBlog ? 'linear-gradient(135deg,#7c3aed,#4f46e5)' : isTwitter ? 'linear-gradient(135deg,#1da1f2,#0ea5e9)' : 'linear-gradient(135deg,#2563eb,#0891b2)' }}>
+            style={{ background: isBlog ? 'linear-gradient(135deg,#7c3aed,#4f46e5)' : isTwitter ? 'linear-gradient(135deg,#1da1f2,#0ea5e9)' : isYTShort ? 'linear-gradient(135deg,#ef4444,#b91c1c)' : isTedTalk ? 'linear-gradient(135deg,#f59e0b,#ea580c)' : 'linear-gradient(135deg,#2563eb,#0891b2)' }}>
             {isBlog ? (
               <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
                 <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
@@ -80,6 +82,14 @@ export default function OutputPanel({ result, mode, onReset }) {
             ) : isTwitter ? (
               <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            ) : isYTShort ? (
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+                <path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+              </svg>
+            ) : isTedTalk ? (
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
               </svg>
             ) : (
               <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
@@ -89,7 +99,7 @@ export default function OutputPanel({ result, mode, onReset }) {
           </div>
           <div>
             <p className="text-sm font-semibold text-slate-200">
-              {isBlog ? "Blog Post" : isTwitter ? "Twitter Thread" : "LinkedIn Post"}
+              {isBlog ? "Blog Post" : isTwitter ? "Twitter Thread" : isYTShort ? "YT Short Points" : isTedTalk ? "TED Talk Summary" : "LinkedIn Post"}
             </p>
             <p className="text-xs text-slate-500 truncate max-w-xs" title={result.video_url}>
               {result.video_url}
@@ -137,7 +147,7 @@ export default function OutputPanel({ result, mode, onReset }) {
 
       {/* Content */}
       <div className="p-6 custom-scroll" style={{ maxHeight: '520px', overflowY: 'auto' }}>
-        {isBlog ? (
+        {isBlog || isYTShort || isTedTalk ? (
           <div className="prose-content">
             {renderMarkdown(content)}
           </div>
