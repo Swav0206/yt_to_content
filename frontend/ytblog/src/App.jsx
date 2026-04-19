@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import UrlInput from "./components/UrlInput";
 import LoadingState from "./components/LoadingState";
 import OutputPanel from "./components/OutputPanel";
-import { generateBlog, generateLinkedIn, generateTwitter, generateYTShort, generateTedTalk } from "./api";
+import { generateBlog, generateLinkedIn, generateTwitter, generateYTShort, generateTedTalk, generateInstagram, generateNewsletter, generateMedium } from "./api";
 
 // Feature cards for the hero section
 const FEATURES = [
@@ -57,6 +57,12 @@ export default function App() {
         ? await generateYTShort(url, language)
         : mode === "tedtalk"
         ? await generateTedTalk(url, language)
+        : mode === "instagram"
+        ? await generateInstagram(url, language)
+        : mode === "newsletter"
+        ? await generateNewsletter(url, language)
+        : mode === "medium"
+        ? await generateMedium(url, language)
         : await generateLinkedIn(url, language);
       setResult(data);
     } catch (err) {
@@ -91,7 +97,7 @@ export default function App() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
             style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)' }}>
             <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-            <span className="text-xs font-semibold text-slate-300 tracking-wide uppercase">AI-Powered Content Engine</span>
+            <span className="text-xs font-semibold text-slate-300 tracking-wide uppercase">AI Content Suite</span>
           </div>
 
           <h1 className="text-5xl md:text-6xl font-black leading-tight mb-5 text-f1f5f9"

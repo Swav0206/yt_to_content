@@ -11,7 +11,7 @@ export default function Navbar() {
           </svg>
         </div>
         <span className="font-bold text-lg" style={{ fontFamily: "'Outfit', sans-serif", letterSpacing: '-0.01em' }}>
-          YT<span className="gradient-text">Creation</span>
+          AI <span className="gradient-text">Content Suite</span>
         </span>
       </div>
       <div className="flex items-center gap-3">

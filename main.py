@@ -189,6 +189,84 @@ CRUCIAL RULE: Write the entire response in {language}.
 Generate the TED Talk summary now:""",
 )
 
+INSTAGRAM_PROMPT = PromptTemplate(
+    input_variables=["transcript", "language"],
+    template="""You are an expert Instagram content creator who writes highly engaging captions.
+
+Below is the transcript of a YouTube video. Based on its content, craft a 
+compelling **Instagram caption**.
+
+STRICT RULES:
+- Start with an attention-grabbing hook in the first line.
+- Use spacing and line breaks to make it highly readable.
+- Extract 2-3 key takeaways or fascinating points from the transcript.
+- Add relevant emojis to break up text and add visual interest.
+- Include a clear Call to Action (e.g., "Save this post for later", "Link in bio", or a question).
+- End with 5-10 relevant hashtags.
+- THIS IS NOT A BLOG. Do not include a title. Just write the caption.
+
+---
+TRANSCRIPT:
+{transcript}
+---
+
+CRUCIAL RULE: Write the entire response in {language}.
+
+Generate the Instagram caption now:""",
+)
+
+NEWSLETTER_PROMPT = PromptTemplate(
+    input_variables=["transcript", "language"],
+    template="""You are a professional email marketer and newsletter author.
+
+Below is the transcript of a YouTube video. Based on its content, write an 
+engaging, high-value **Email Newsletter**.
+
+Guidelines:
+- Create a catchy, intriguing Subject Line at the top.
+- Open with a friendly, personal greeting and hook.
+- Structure the body of the email clearly, using brief paragraphs and bullet points for readability.
+- Share the core value, insights, or story from the video.
+- Write in a conversational, relatable tone as if writing to a friend.
+- Include a clear Call to Action (e.g., "Reply to this email", "Watch the full video here").
+- Sign off cleanly.
+
+---
+TRANSCRIPT:
+{transcript}
+---
+
+CRUCIAL RULE: Write the entire response in {language}.
+
+Generate the Email Newsletter now:""",
+)
+
+MEDIUM_PROMPT = PromptTemplate(
+    input_variables=["transcript", "language"],
+    template="""You are a top Medium.com writer who creates in-depth, thought-provoking articles.
+
+Below is the transcript of a YouTube video. Read it carefully and produce a 
+well-structured, engaging **Medium article** based on its content.
+
+Guidelines:
+- Start with a compelling title (use a markdown H1 heading) and an optional subtitle (H2).
+- Write a strong hook that draws the reader in emotionally or intellectually.
+- Organize the body with clear, evocative H2 subheadings.
+- Weave a narrative rather than just summarizing; add insightful commentary based on the provided facts.
+- Use formatting (bolding, italics, blockquotes) to highlight key points.
+- Conclude with a strong, lingering thought or takeaway.
+- Length: 800-1200 words if possible given the transcript length.
+
+---
+TRANSCRIPT:
+{transcript}
+---
+
+CRUCIAL RULE: Write the entire response in {language}.
+
+Generate the full Medium article now:""",
+)
+
 # ---------------------------------------------------------------------------
 # LCEL Chains (Prompt | LLM | OutputParser)
 # ---------------------------------------------------------------------------
@@ -198,6 +276,9 @@ linkedin_chain = LINKEDIN_PROMPT | llm | output_parser
 twitter_chain = TWITTER_PROMPT | llm | output_parser
 ytshort_chain = YTSHORT_PROMPT | llm | output_parser
 tedtalk_chain = TED_TALK_PROMPT | llm | output_parser
+instagram_chain = INSTAGRAM_PROMPT | llm | output_parser
+newsletter_chain = NEWSLETTER_PROMPT | llm | output_parser
+medium_chain = MEDIUM_PROMPT | llm | output_parser
 
 # ---------------------------------------------------------------------------
 # Request / Response schemas
@@ -225,6 +306,18 @@ class YTShortResponse(BaseModel):
 class TedTalkResponse(BaseModel):
     video_url: str
     tedtalk_post: str
+
+class InstagramResponse(BaseModel):
+    video_url: str
+    instagram_post: str
+
+class NewsletterResponse(BaseModel):
+    video_url: str
+    newsletter_post: str
+
+class MediumResponse(BaseModel):
+    video_url: str
+    medium_post: str
 
 # ---------------------------------------------------------------------------
 # Helper: fetch transcript with error handling
@@ -387,3 +480,66 @@ async def generate_tedtalk(request: URLRequest):
         raise HTTPException(status_code=500, detail="TED Talk generation returned empty content.")
 
     return TedTalkResponse(video_url=request.url, tedtalk_post=tedtalk_post.strip())
+
+
+@app.post("/instagram", response_model=InstagramResponse, tags=["Content Generation"])
+async def generate_instagram(request: URLRequest):
+    """
+    Given a YouTube video URL, extract its transcript and generate an Instagram caption.
+    """
+    transcript = fetch_transcript_safe(request.url)
+
+    try:
+        instagram_post = instagram_chain.invoke({"transcript": transcript, "language": request.language})
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"LLM error while generating Instagram caption: {e}",
+        )
+
+    if not instagram_post or not instagram_post.strip():
+        raise HTTPException(status_code=500, detail="Instagram caption generation returned empty content.")
+
+    return InstagramResponse(video_url=request.url, instagram_post=instagram_post.strip())
+
+
+@app.post("/newsletter", response_model=NewsletterResponse, tags=["Content Generation"])
+async def generate_newsletter(request: URLRequest):
+    """
+    Given a YouTube video URL, extract its transcript and generate an Email Newsletter.
+    """
+    transcript = fetch_transcript_safe(request.url)
+
+    try:
+        newsletter_post = newsletter_chain.invoke({"transcript": transcript, "language": request.language})
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"LLM error while generating Email Newsletter: {e}",
+        )
+
+    if not newsletter_post or not newsletter_post.strip():
+        raise HTTPException(status_code=500, detail="Email Newsletter generation returned empty content.")
+
+    return NewsletterResponse(video_url=request.url, newsletter_post=newsletter_post.strip())
+
+
+@app.post("/medium", response_model=MediumResponse, tags=["Content Generation"])
+async def generate_medium(request: URLRequest):
+    """
+    Given a YouTube video URL, extract its transcript and generate a Medium article.
+    """
+    transcript = fetch_transcript_safe(request.url)
+
+    try:
+        medium_post = medium_chain.invoke({"transcript": transcript, "language": request.language})
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"LLM error while generating Medium article: {e}",
+        )
+
+    if not medium_post or not medium_post.strip():
+        raise HTTPException(status_code=500, detail="Medium article generation returned empty content.")
+
+    return MediumResponse(video_url=request.url, medium_post=medium_post.strip())

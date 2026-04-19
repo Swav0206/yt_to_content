@@ -60,7 +60,7 @@ def get_transcript(youtube_url: str) -> str:
         raise ValueError("This video is unavailable or private.")
     except Exception as e:
         if "blocking requests from your IP" in str(e):
-            return "Welcome back! Today we're reviewing the latest tech gadget. It has a stunning OLED display, a super-fast processor, and amazing battery life. I've used it for a week, and here are my thoughts. First, the design is sleek, but it's prone to fingerprints. Second, the performance is top-notch, handling heavy gaming easily. Finally, the price is high, but it's worth it for power users. Overall, it's an excellent device. Let me know what you think in the comments, and don't forget to subscribe!"
+            raise ValueError("YouTube is temporarily blocking automated requests from your network. Please wait a while before trying again, or use a different network/video.")
         raise ValueError(f"Failed to fetch transcript: {e}")
 
     # `fetched` is a FetchedTranscript iterable of snippet dicts with 'text' key

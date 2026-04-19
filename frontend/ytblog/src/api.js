@@ -64,3 +64,42 @@ export async function generateTedTalk(url, language = "English") {
   }
   return res.json(); // { video_url, tedtalk_post }
 }
+
+export async function generateInstagram(url, language = "English") {
+  const res = await fetch(`${API_BASE}/instagram`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url, language }),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || `Request failed: ${res.status}`);
+  }
+  return res.json(); // { video_url, instagram_post }
+}
+
+export async function generateNewsletter(url, language = "English") {
+  const res = await fetch(`${API_BASE}/newsletter`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url, language }),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || `Request failed: ${res.status}`);
+  }
+  return res.json(); // { video_url, newsletter_post }
+}
+
+export async function generateMedium(url, language = "English") {
+  const res = await fetch(`${API_BASE}/medium`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url, language }),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || `Request failed: ${res.status}`);
+  }
+  return res.json(); // { video_url, medium_post }
+}
