@@ -22,7 +22,7 @@ export default function LoadingState({ mode }) {
           </div>
         </div>
         <div className="text-center">
-          <p className="text-slate-200 font-semibold text-lg">
+          <p className="text-slate-800 font-semibold text-lg">
             {isBlog ? "Crafting your blog post…" : isTwitter ? "Drafting your Twitter thread…" : isYTShort ? "Extracting Short points…" : "Writing your LinkedIn post…"}
           </p>
           <p className="text-slate-500 text-sm mt-1">

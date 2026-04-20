@@ -48,7 +48,7 @@ export default function UrlInput({ onGenerate, isLoading }) {
             <button
               key={tab.id}
               onClick={() => setMode(tab.id)}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium border transition-all duration-200 ${mode === tab.id ? "tab-active" : "border-white/10 text-slate-400 hover:text-slate-200 hover:border-white/20"}`}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium border transition-all duration-200 ${mode === tab.id ? "tab-active" : "border-black/5 text-slate-500 hover:text-slate-800 hover:border-black/10 hover:bg-black/5"}`}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                 <path d={tab.icon} />
@@ -64,7 +64,7 @@ export default function UrlInput({ onGenerate, isLoading }) {
             value={language}
             onChange={(e) => setLanguage(e.target.value)}
             disabled={isLoading}
-            className="input-field appearance-none py-2.5 pl-4 pr-10 text-sm font-medium text-slate-300 bg-black/20 focus:bg-black/40 border-white/10 hover:border-white/20 hover:text-slate-200 transition-all cursor-pointer rounded-xl h-auto"
+            className="input-field appearance-none py-2.5 pl-4 pr-10 text-sm font-medium text-slate-700 bg-black/5 focus:bg-black/5 border-black/5 hover:border-black/10 hover:text-slate-900 transition-all cursor-pointer rounded-xl h-auto"
             style={{ width: '160px' }}
           >
             <option value="English">🇬🇧 English</option>
@@ -90,7 +90,7 @@ export default function UrlInput({ onGenerate, isLoading }) {
 
       {/* Input form */}
       <form onSubmit={handleSubmit}>
-        <label className="block text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2">
+        <label className="block text-xs font-semibold text-slate-600 uppercase tracking-widest mb-2">
           YouTube URL
         </label>
         <div className="flex gap-3">
@@ -137,7 +137,7 @@ export default function UrlInput({ onGenerate, isLoading }) {
           </button>
         </div>
         {urlError && (
-          <p className="text-red-400 text-sm mt-2 flex items-center gap-1.5 animate-fade-in">
+          <p className="text-red-600 text-sm mt-2 flex items-center gap-1.5 animate-fade-in">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
             </svg>
