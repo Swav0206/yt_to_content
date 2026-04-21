@@ -9,23 +9,23 @@ export default function LoadingState({ mode }) {
         <div className="relative w-16 h-16">
           {/* Pulse rings */}
           <span className="absolute inset-0 rounded-full border-2 animate-ping"
-            style={{ borderColor: isBlog ? 'rgba(139,92,246,0.5)' : isTwitter ? 'rgba(29,161,242,0.5)' : isYTShort ? 'rgba(239,68,68,0.5)' : 'rgba(96,165,250,0.5)', animationDuration: '1.2s' }} />
+            style={{ borderColor: 'rgba(255,255,255,0.5)', animationDuration: '1.2s' }} />
           <span className="absolute inset-0 rounded-full border-2 animate-ping"
-            style={{ borderColor: isBlog ? 'rgba(139,92,246,0.3)' : isTwitter ? 'rgba(29,161,242,0.3)' : isYTShort ? 'rgba(239,68,68,0.3)' : 'rgba(96,165,250,0.3)', animationDuration: '1.8s' }} />
+            style={{ borderColor: 'rgba(255,255,255,0.3)', animationDuration: '1.8s' }} />
           {/* Core circle */}
           <div className="absolute inset-2 rounded-full flex items-center justify-center"
-            style={{ background: isBlog ? 'linear-gradient(135deg, rgba(124,58,237,0.3), rgba(139,92,246,0.1))' : isTwitter ? 'linear-gradient(135deg, rgba(29,161,242,0.3), rgba(14,165,233,0.1))' : isYTShort ? 'linear-gradient(135deg, rgba(239,68,68,0.3), rgba(185,28,28,0.1))' : 'linear-gradient(135deg, rgba(37,99,235,0.3), rgba(96,165,250,0.1))' }}>
+            style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05))' }}>
             <svg className="animate-spin-slow" width="22" height="22" viewBox="0 0 24 24" fill="none"
-              stroke={isBlog ? "#a78bfa" : isTwitter ? "#38bdf8" : isYTShort ? "#f87171" : "#60a5fa"} strokeWidth="2.5">
+              stroke="#ffffff" strokeWidth="2.5">
               <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
             </svg>
           </div>
         </div>
         <div className="text-center">
-          <p className="text-slate-800 font-semibold text-lg">
+          <p className="text-white font-semibold text-lg">
             {isBlog ? "Crafting your blog post…" : isTwitter ? "Drafting your Twitter thread…" : isYTShort ? "Extracting Short points…" : "Writing your LinkedIn post…"}
           </p>
-          <p className="text-slate-500 text-sm mt-1">
+          <p className="text-gray-400 text-sm mt-1">
             Extracting transcript & generating with Groq AI
           </p>
         </div>

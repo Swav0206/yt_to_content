@@ -31,7 +31,7 @@ function renderMarkdown(text) {
       elements.push(<ol key={`ol-${i}`}>{items}</ol>);
       continue;
     } else if (line.startsWith("---") || line.startsWith("***")) {
-      elements.push(<hr key={i} style={{ borderColor: 'rgba(0,0,0,0.08)', margin: '20px 0' }} />);
+      elements.push(<hr key={i} style={{ borderColor: 'rgba(255,255,255,0.15)', margin: '20px 0' }} />);
     } else if (line.trim() !== "") {
       elements.push(<p key={i}>{renderInline(line)}</p>);
     }
@@ -74,10 +74,10 @@ export default function OutputPanel({ result, mode, onReset }) {
     <div className="glass-card overflow-hidden animate-fade-in-up" id="output-panel">
       {/* Header bar */}
       <div className="flex items-center justify-between px-6 py-4"
-        style={{ borderBottom: '1px solid rgba(0,0,0,0.07)', background: 'rgba(0,0,0,0.02)' }}>
+        style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.03)' }}>
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg flex items-center justify-center"
-            style={{ background: isBlog || isMedium ? 'linear-gradient(135deg,#7c3aed,#4f46e5)' : isTwitter ? 'linear-gradient(135deg,#1da1f2,#0ea5e9)' : isInstagram ? 'linear-gradient(135deg,#e1306c,#f56040)' : isYTShort ? 'linear-gradient(135deg,#ef4444,#b91c1c)' : isTedTalk ? 'linear-gradient(135deg,#f59e0b,#ea580c)' : isNewsletter ? 'linear-gradient(135deg,#10b981,#059669)' : 'linear-gradient(135deg,#2563eb,#0891b2)' }}>
+            style={{ background: 'linear-gradient(135deg, #333, #111)', border: '1px solid rgba(255,255,255,0.2)' }}>
             {isBlog || isMedium ? (
               <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
                 <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
@@ -109,10 +109,10 @@ export default function OutputPanel({ result, mode, onReset }) {
             )}
           </div>
           <div>
-            <p className="text-sm font-semibold text-slate-800">
+            <p className="text-sm font-semibold text-white">
               {isBlog ? "Blog Post" : isTwitter ? "Twitter Thread" : isYTShort ? "YT Short Points" : isTedTalk ? "TED Talk Summary" : isInstagram ? "Instagram Caption" : isNewsletter ? "Email Newsletter" : isMedium ? "Medium Article" : "LinkedIn Post"}
             </p>
-            <p className="text-xs text-slate-500 truncate max-w-xs" title={result.video_url}>
+            <p className="text-xs text-gray-400 truncate max-w-xs" title={result.video_url}>
               {result.video_url}
             </p>
           </div>
@@ -163,11 +163,11 @@ export default function OutputPanel({ result, mode, onReset }) {
             {renderMarkdown(content)}
           </div>
         ) : isTwitter ? (
-          <div className="twitter-content whitespace-pre-wrap text-slate-700 leading-relaxed font-sans mt-2">
+          <div className="twitter-content whitespace-pre-wrap text-gray-200 leading-relaxed font-sans mt-2">
             {content}
           </div>
         ) : (
-          <div className="linkedin-content whitespace-pre-wrap text-slate-700 leading-relaxed mt-2">
+          <div className="linkedin-content whitespace-pre-wrap text-gray-200 leading-relaxed mt-2">
             {content}
           </div>
         )}
@@ -175,21 +175,21 @@ export default function OutputPanel({ result, mode, onReset }) {
 
       {/* Footer stats */}
       <div className="px-6 py-3 flex items-center gap-4"
-        style={{ borderTop: '1px solid rgba(0,0,0,0.05)', background: 'rgba(0,0,0,0.01)' }}>
-        <span className="text-xs text-slate-500 flex items-center gap-1">
+        style={{ borderTop: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.03)' }}>
+        <span className="text-xs text-gray-400 flex items-center gap-1">
           <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-8v4h4l-5 8z"/>
           </svg>
           {content.split(/\s+/).length} words
         </span>
-        <span className="text-xs text-slate-500 flex items-center gap-1">
+        <span className="text-xs text-gray-400 flex items-center gap-1">
           <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
             <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
           </svg>
           {content.length} chars
         </span>
         <div className="ml-auto">
-          <span className="text-xs px-2 py-1 rounded-full font-medium" style={{ background: 'rgba(16,185,129,0.1)', color: '#059669' }}>
+          <span className="text-xs px-2 py-1 rounded-full font-medium" style={{ background: 'rgba(255,255,255,0.1)', color: '#ffffff' }}>
             ✓ Generated by Groq AI
           </span>
         </div>

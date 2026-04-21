@@ -30,7 +30,7 @@ export default function UrlInput({ onGenerate, isLoading }) {
     <div className="glass-card-strong relative overflow-hidden p-8 animate-fade-in-up">
       {/* Subtle glow inside card */}
       <div className="absolute -top-20 -right-20 w-60 h-60 orb opacity-20"
-        style={{ background: mode === "blog" ? "radial-gradient(circle, #7c3aed, transparent)" : "radial-gradient(circle, #2563eb, transparent)" }} />
+        style={{ background: "radial-gradient(circle, rgba(255,255,255,0.3), transparent)" }} />
 
       <div className="flex items-center justify-between mb-7 flex-wrap gap-4">
         {/* Mode toggle tabs */}
@@ -48,7 +48,7 @@ export default function UrlInput({ onGenerate, isLoading }) {
             <button
               key={tab.id}
               onClick={() => setMode(tab.id)}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium border transition-all duration-200 ${mode === tab.id ? "tab-active" : "border-black/5 text-slate-500 hover:text-slate-800 hover:border-black/10 hover:bg-black/5"}`}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium border transition-all duration-200 ${mode === tab.id ? "tab-active" : "border-white/10 text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/5"}`}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                 <path d={tab.icon} />
@@ -64,7 +64,7 @@ export default function UrlInput({ onGenerate, isLoading }) {
             value={language}
             onChange={(e) => setLanguage(e.target.value)}
             disabled={isLoading}
-            className="input-field appearance-none py-2.5 pl-4 pr-10 text-sm font-medium text-slate-700 bg-black/5 focus:bg-black/5 border-black/5 hover:border-black/10 hover:text-slate-900 transition-all cursor-pointer rounded-xl h-auto"
+            className="input-field appearance-none py-2.5 pl-4 pr-10 text-sm font-medium text-gray-200 bg-white/5 focus:bg-white/10 border-white/10 hover:border-white/20 hover:text-white transition-all cursor-pointer rounded-xl h-auto"
             style={{ width: '160px' }}
           >
             <option value="English">🇬🇧 English</option>
@@ -80,7 +80,7 @@ export default function UrlInput({ onGenerate, isLoading }) {
             <option value="Arabic">🇸🇦 Arabic</option>
             <option value="Russian">🇷🇺 Russian</option>
           </select>
-          <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+          <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                <polyline points="6 9 12 15 18 9" />
             </svg>
@@ -90,13 +90,13 @@ export default function UrlInput({ onGenerate, isLoading }) {
 
       {/* Input form */}
       <form onSubmit={handleSubmit}>
-        <label className="block text-xs font-semibold text-slate-600 uppercase tracking-widest mb-2">
+        <label className="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">
           YouTube URL
         </label>
         <div className="flex gap-3">
           <div className="flex-1 relative">
             {/* YT icon inside input */}
-            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-red-500">
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M21.8 8.001a2.75 2.75 0 0 0-1.935-1.951C18.2 5.6 12 5.6 12 5.6s-6.2 0-7.865.45A2.75 2.75 0 0 0 2.2 8.001 28.8 28.8 0 0 0 1.75 12a28.8 28.8 0 0 0 .45 3.999 2.75 2.75 0 0 0 1.935 1.951C5.8 18.4 12 18.4 12 18.4s6.2 0 7.865-.45a2.75 2.75 0 0 0 1.935-1.951A28.8 28.8 0 0 0 22.25 12a28.8 28.8 0 0 0-.45-3.999zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/>
               </svg>

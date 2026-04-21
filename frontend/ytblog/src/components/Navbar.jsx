@@ -1,11 +1,11 @@
 export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4"
-      style={{ background: 'rgba(252, 253, 255, 0.85)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
+      style={{ background: 'rgba(0, 0, 0, 0.85)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
       <div className="flex items-center gap-3">
         {/* Logo icon */}
         <div className="w-8 h-8 rounded-lg flex items-center justify-center"
-          style={{ background: 'linear-gradient(135deg, #7c3aed, #2563eb)' }}>
+          style={{ background: 'linear-gradient(135deg, #333333, #000000)', border: '1px solid rgba(255,255,255,0.2)' }}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
           </svg>
