@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import UrlInput from "./components/UrlInput";
 import LoadingState from "./components/LoadingState";
 import OutputPanel from "./components/OutputPanel";
-import { generateBlog, generateLinkedIn, generateTwitter, generateYTShort, generateTedTalk, generateInstagram, generateNewsletter, generateMedium } from "./api";
+import { generateBlog, generateLinkedIn, generateTwitter, generateYTShort, generateTedTalk, generateInstagram, generateNewsletter, generateMedium, generateThreads, generatePinterest, generateQuora } from "./api";
 
 // Feature cards for the hero section
 const FEATURES = [
@@ -63,6 +63,12 @@ export default function App() {
         ? await generateNewsletter(url, language)
         : mode === "medium"
         ? await generateMedium(url, language)
+        : mode === "threads"
+        ? await generateThreads(url, language)
+        : mode === "pinterest"
+        ? await generatePinterest(url, language)
+        : mode === "quora"
+        ? await generateQuora(url, language)
         : await generateLinkedIn(url, language);
       setResult(data);
     } catch (err) {

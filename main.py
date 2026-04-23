@@ -267,6 +267,83 @@ CRUCIAL RULE: Write the entire response in {language}.
 Generate the full Medium article now:""",
 )
 
+THREADS_PROMPT = PromptTemplate(
+    input_variables=["transcript", "language"],
+    template="""You are a professional Threads (Instagram) ghostwriter who creates viral, 
+conversational, and high-engagement threads.
+
+Below is the transcript of a YouTube video. Based on its content, craft a 
+compelling **Threads series**.
+
+Guidelines:
+- Start with a strong, relatable hook that stops the scroll.
+- Use a conversational, "friends-chatting" tone (less formal than LinkedIn/Twitter).
+- Break the content into 5-8 short, punchy posts.
+- Use emojis naturally to convey emotion.
+- Include a "What do you think?" style question at the end to spark comments.
+- Keep it concise and mobile-friendly.
+
+---
+TRANSCRIPT:
+{transcript}
+---
+
+CRUCIAL RULE: Write the entire response in {language}.
+
+Generate the Threads series now:""",
+)
+
+PINTEREST_PROMPT = PromptTemplate(
+    input_variables=["transcript", "language"],
+    template="""You are a Pinterest marketing expert and SEO specialist.
+
+Below is the transcript of a YouTube video. Based on its content, create a 
+**Pinterest Pin Title and Description**.
+
+Guidelines:
+- Create 3 distinct Pin Titles (attention-grabbing and keyword-rich).
+- Write an SEO-optimized Pin Description (up to 500 characters) that explains the value.
+- Use natural language but include high-search-volume keywords from the transcript.
+- Include a clear call to action (e.g., "Click to watch the full tutorial").
+- Add 5-10 relevant hashtags.
+- Suggest 3 ideas for "Text Overlay" to be used on the Pin image.
+
+---
+TRANSCRIPT:
+{transcript}
+---
+
+CRUCIAL RULE: Write the entire response in {language}.
+
+Generate the Pinterest content now:""",
+)
+
+QUORA_PROMPT = PromptTemplate(
+    input_variables=["transcript", "language"],
+    template="""You are a top-voted Quora contributor known for providing helpful, 
+detailed, and authoritative answers.
+
+Below is the transcript of a YouTube video. Based on its content, write a 
+**Quora-style answer** to a hypothetical relevant question.
+
+Guidelines:
+- Start by stating a common question this video answers.
+- Provide a detailed, well-structured answer based on the facts in the transcript.
+- Use a helpful, educational, and slightly personal tone.
+- Use bolding for key points and bullet points for readability.
+- Conclude with a helpful summary or "Final Tip".
+- DO NOT just summarize; provide value as if you are answering a real person.
+
+---
+TRANSCRIPT:
+{transcript}
+---
+
+CRUCIAL RULE: Write the entire response in {language}.
+
+Generate the Quora answer now:""",
+)
+
 # ---------------------------------------------------------------------------
 # LCEL Chains (Prompt | LLM | OutputParser)
 # ---------------------------------------------------------------------------
@@ -279,6 +356,9 @@ tedtalk_chain = TED_TALK_PROMPT | llm | output_parser
 instagram_chain = INSTAGRAM_PROMPT | llm | output_parser
 newsletter_chain = NEWSLETTER_PROMPT | llm | output_parser
 medium_chain = MEDIUM_PROMPT | llm | output_parser
+threads_chain = THREADS_PROMPT | llm | output_parser
+pinterest_chain = PINTEREST_PROMPT | llm | output_parser
+quora_chain = QUORA_PROMPT | llm | output_parser
 
 # ---------------------------------------------------------------------------
 # Request / Response schemas
@@ -318,6 +398,18 @@ class NewsletterResponse(BaseModel):
 class MediumResponse(BaseModel):
     video_url: str
     medium_post: str
+
+class ThreadsResponse(BaseModel):
+    video_url: str
+    threads_post: str
+
+class PinterestResponse(BaseModel):
+    video_url: str
+    pinterest_post: str
+
+class QuoraResponse(BaseModel):
+    video_url: str
+    quora_post: str
 
 # ---------------------------------------------------------------------------
 # Helper: fetch transcript with error handling
@@ -543,3 +635,42 @@ async def generate_medium(request: URLRequest):
         raise HTTPException(status_code=500, detail="Medium article generation returned empty content.")
 
     return MediumResponse(video_url=request.url, medium_post=medium_post.strip())
+
+
+@app.post("/threads", response_model=ThreadsResponse, tags=["Content Generation"])
+async def generate_threads(request: URLRequest):
+    """
+    Given a YouTube video URL, extract its transcript and generate a Threads series.
+    """
+    transcript = fetch_transcript_safe(request.url)
+    try:
+        threads_post = threads_chain.invoke({"transcript": transcript, "language": request.language})
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"LLM error while generating Threads: {e}")
+    return ThreadsResponse(video_url=request.url, threads_post=threads_post.strip())
+
+
+@app.post("/pinterest", response_model=PinterestResponse, tags=["Content Generation"])
+async def generate_pinterest(request: URLRequest):
+    """
+    Given a YouTube video URL, extract its transcript and generate Pinterest content.
+    """
+    transcript = fetch_transcript_safe(request.url)
+    try:
+        pinterest_post = pinterest_chain.invoke({"transcript": transcript, "language": request.language})
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"LLM error while generating Pinterest: {e}")
+    return PinterestResponse(video_url=request.url, pinterest_post=pinterest_post.strip())
+
+
+@app.post("/quora", response_model=QuoraResponse, tags=["Content Generation"])
+async def generate_quora(request: URLRequest):
+    """
+    Given a YouTube video URL, extract its transcript and generate a Quora answer.
+    """
+    transcript = fetch_transcript_safe(request.url)
+    try:
+        quora_post = quora_chain.invoke({"transcript": transcript, "language": request.language})
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"LLM error while generating Quora answer: {e}")
+    return QuoraResponse(video_url=request.url, quora_post=quora_post.strip())

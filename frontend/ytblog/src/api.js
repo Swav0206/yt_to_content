@@ -103,3 +103,42 @@ export async function generateMedium(url, language = "English") {
   }
   return res.json(); // { video_url, medium_post }
 }
+
+export async function generateThreads(url, language = "English") {
+  const res = await fetch(`${API_BASE}/threads`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url, language }),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || `Request failed: ${res.status}`);
+  }
+  return res.json(); // { video_url, threads_post }
+}
+
+export async function generatePinterest(url, language = "English") {
+  const res = await fetch(`${API_BASE}/pinterest`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url, language }),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || `Request failed: ${res.status}`);
+  }
+  return res.json(); // { video_url, pinterest_post }
+}
+
+export async function generateQuora(url, language = "English") {
+  const res = await fetch(`${API_BASE}/quora`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url, language }),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || `Request failed: ${res.status}`);
+  }
+  return res.json(); // { video_url, quora_post }
+}
