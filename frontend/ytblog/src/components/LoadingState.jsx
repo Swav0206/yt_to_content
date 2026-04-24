@@ -2,6 +2,22 @@ export default function LoadingState({ mode }) {
   const isBlog = mode === "blog";
   const isTwitter = mode === "twitter";
   const isYTShort = mode === "ytshort";
+  const isTikTok = mode === "tiktok";
+  const isFacebook = mode === "facebook";
+  const isCommunity = mode === "community";
+  const isSummary = mode === "summary";
+  
+  const getMessage = () => {
+    if (isBlog) return "Crafting your blog post…";
+    if (isTwitter) return "Drafting your Twitter thread…";
+    if (isYTShort) return "Extracting Short points…";
+    if (isTikTok) return "Writing viral TikTok script…";
+    if (isFacebook) return "Creating Facebook post…";
+    if (isCommunity) return "Drafting Community update…";
+    if (isSummary) return "Analyzing for SEO & Summary…";
+    return "Writing your LinkedIn post…";
+  };
+
   return (
     <div className="glass-card p-8 animate-fade-in">
       {/* Spinner + label */}
@@ -23,7 +39,7 @@ export default function LoadingState({ mode }) {
         </div>
         <div className="text-center">
           <p className="text-white font-semibold text-lg">
-            {isBlog ? "Crafting your blog post…" : isTwitter ? "Drafting your Twitter thread…" : isYTShort ? "Extracting Short points…" : "Writing your LinkedIn post…"}
+            {getMessage()}
           </p>
           <p className="text-gray-400 text-sm mt-1">
             Extracting transcript & generating with Groq AI

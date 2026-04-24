@@ -15,14 +15,24 @@ It helps content creators, marketers, and professionals save time by generating 
 ✨ Features
 
 * 🎥 Convert YouTube videos into:
-
-  * ✍️ Blog posts (structured, long-form)
-  * 💼 LinkedIn posts (professional & engaging)
-  * 🐦 Twitter posts (short & catchy)
-* 🌍 Multilingual content generation
-* ⚡ Fast AI responses using Groq LLM
-* 🧠 Smart prompt-based content generation
-* 💻 Clean and responsive UI
+  * ✍️ **Blog Posts** (structured, long-form)
+  * 💼 **LinkedIn Posts** (professional & engaging)
+  * 🐦 **Twitter (X) Threads** (short & catchy)
+  * 🎬 **TikTok Scripts** (high-energy & viral)
+  * 👥 **Facebook Posts** (storytelling & community)
+  * 📢 **YouTube Community Posts** (engagement-focused)
+  * 📸 **Instagram Captions** (aesthetic & emojis)
+  * 📧 **Email Newsletters** (personal & conversational)
+  * 📝 **Medium Articles** (in-depth & intellectual)
+  * 🧵 **Threads (Meta)** (conversational series)
+  * 📌 **Pinterest Pins** (SEO-optimized titles & descriptions)
+  * ❓ **Quora Answers** (authoritative & helpful)
+  * 📊 **SEO & Summary Reports** (Keywords, Tags, & Executive Summary)
+* 🌍 Multilingual content generation (12+ languages)
+* ⚡ Ultra-fast inference using **Groq (LLaMA 3)**
+* 🧠 Smart prompt engineering for each platform
+* 💻 Premium Glassmorphic UI with dark mode
+* 📥 **One-click Copy & Download** as .txt
 * 🔐 Secure API key handling
 
 ---
@@ -30,18 +40,16 @@ It helps content creators, marketers, and professionals save time by generating 
 🛠️ Tech Stack
 
 ### Frontend
-
 * React (Vite)
 * Tailwind CSS
+* Framer Motion (for smooth animations)
 
 ### Backend
-
 * FastAPI (Python)
 * LangChain
-* Groq LLM API
+* Groq LLM API (LLaMA-3-8B/70B)
 
 ### Other Tools
-
 * YouTube Transcript API
 * Python Dotenv
 
@@ -50,14 +58,10 @@ It helps content creators, marketers, and professionals save time by generating 
 ⚙️ How It Works
 
 1. User enters a YouTube video URL
-2. Backend extracts the transcript
-3. AI model processes the transcript
-4. Generates:
-
-   * Blog content
-   * LinkedIn post
-   * Twitter post
-5. Output is displayed on the frontend
+2. Backend extracts the transcript (tries English, then falls back to available)
+3. AI model processes the transcript using platform-specific prompts
+4. Generates optimized content for the selected platform
+5. Output is rendered with markdown support and can be copied or saved
 
 ---
 
@@ -66,8 +70,8 @@ It helps content creators, marketers, and professionals save time by generating 
 🔹 Clone the repository
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/Swav0206/yt_to_content.git
+cd yt_to_content
 ```
 
 ---
@@ -108,26 +112,26 @@ npm run dev
 
 * Open frontend → `http://localhost:5173`
 * Enter YouTube URL
-* Select content type
+* Select content type from the tab bar
 * Generate content instantly
+* Use "Save" to download as a text file
 
 ---
 
 🎯 Project Highlights
 
-* 🔄 Multi-platform content generation
-* 🌍 Multilingual support
-* ⚡ Fast AI inference using Groq
-* 🧩 Full-stack implementation (Frontend + Backend + AI)
+* 🔄 **15+ Platform Formats**: The most comprehensive YouTube repurposing tool.
+* 🌍 **Global Reach**: Generate content in Spanish, Hindi, French, and more.
+* ⚡ **Performance**: Under 3 seconds generation time thanks to Groq.
+* 🧩 **Full-stack**: Production-ready architecture.
 
 ---
 
 🔮 Future Scope
 
-* 📱 Instagram caption generation
-* 🌐 More language support
-* 📄 Export as PDF/Doc
-* ☁️ Deployment (cloud hosting)
+* 🖼️ AI Image generation for Pinterest/Instagram (DALL-E/Stable Diffusion)
+* ☁️ Cloud deployment (Vercel/Render)
+* 🔐 User Authentication & History
 
 ---
 

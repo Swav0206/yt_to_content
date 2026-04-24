@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import UrlInput from "./components/UrlInput";
 import LoadingState from "./components/LoadingState";
 import OutputPanel from "./components/OutputPanel";
-import { generateBlog, generateLinkedIn, generateTwitter, generateYTShort, generateTedTalk, generateInstagram, generateNewsletter, generateMedium, generateThreads, generatePinterest, generateQuora } from "./api";
+import { generateBlog, generateLinkedIn, generateTwitter, generateYTShort, generateTedTalk, generateInstagram, generateNewsletter, generateMedium, generateThreads, generatePinterest, generateQuora, generateTikTok, generateFacebook, generateCommunity, generateSummary } from "./api";
 
 // Feature cards for the hero section
 const FEATURES = [
@@ -23,8 +23,8 @@ const FEATURES = [
   },
   {
     icon: "M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 0 1-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z",
-    title: "Tri-Format",
-    desc: "Get a long-form blog, a punchy LinkedIn post, or a viral Twitter thread",
+    title: "Multi-Platform",
+    desc: "15+ formats including Blog, LinkedIn, TikTok, Facebook, and SEO Summary",
     color: "#34d399",
     bg: "rgba(52,211,153,0.08)",
   },
@@ -32,7 +32,7 @@ const FEATURES = [
 
 const STEPS = [
   { num: "01", text: "Paste any YouTube video URL" },
-  { num: "02", text: "Choose Blog or LinkedIn format" },
+  { num: "02", text: "Choose your target platform" },
   { num: "03", text: "Hit Generate and copy your content" },
 ];
 
@@ -49,27 +49,25 @@ export default function App() {
     setCurrentMode(mode);
 
     try {
-      const data = mode === "blog"
-        ? await generateBlog(url, language)
-        : mode === "twitter"
-        ? await generateTwitter(url, language)
-        : mode === "ytshort"
-        ? await generateYTShort(url, language)
-        : mode === "tedtalk"
-        ? await generateTedTalk(url, language)
-        : mode === "instagram"
-        ? await generateInstagram(url, language)
-        : mode === "newsletter"
-        ? await generateNewsletter(url, language)
-        : mode === "medium"
-        ? await generateMedium(url, language)
-        : mode === "threads"
-        ? await generateThreads(url, language)
-        : mode === "pinterest"
-        ? await generatePinterest(url, language)
-        : mode === "quora"
-        ? await generateQuora(url, language)
-        : await generateLinkedIn(url, language);
+      let data;
+      switch (mode) {
+        case "blog": data = await generateBlog(url, language); break;
+        case "linkedin": data = await generateLinkedIn(url, language); break;
+        case "twitter": data = await generateTwitter(url, language); break;
+        case "ytshort": data = await generateYTShort(url, language); break;
+        case "tedtalk": data = await generateTedTalk(url, language); break;
+        case "instagram": data = await generateInstagram(url, language); break;
+        case "newsletter": data = await generateNewsletter(url, language); break;
+        case "medium": data = await generateMedium(url, language); break;
+        case "threads": data = await generateThreads(url, language); break;
+        case "pinterest": data = await generatePinterest(url, language); break;
+        case "quora": data = await generateQuora(url, language); break;
+        case "tiktok": data = await generateTikTok(url, language); break;
+        case "facebook": data = await generateFacebook(url, language); break;
+        case "community": data = await generateCommunity(url, language); break;
+        case "summary": data = await generateSummary(url, language); break;
+        default: data = await generateLinkedIn(url, language);
+      }
       setResult(data);
     } catch (err) {
       setError(err.message || "Something went wrong generating your content.");

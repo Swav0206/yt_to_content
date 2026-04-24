@@ -112,98 +112,20 @@ CRUCIAL RULE: Write the entire response in {language}.
 Generate the LinkedIn post now:""",
 )
 
-TWITTER_PROMPT = PromptTemplate(
+TIKTOK_PROMPT = PromptTemplate(
     input_variables=["transcript", "language"],
-    template="""You are a professional Twitter/X ghostwriter who creates viral, 
-engaging threads and posts.
-
+    template="""You are a viral TikTok scriptwriter.
+    
 Below is the transcript of a YouTube video. Based on its content, craft a 
-compelling **Twitter post or thread**.
-
-Guidelines:
-- If the content is short, write a single punchy tweet. If long, write a 3-5 tweet thread.
-- Open with an attention-grabbing hook.
-- Use bullet points or short sentences for readability.
-- Add relevant emojis but keep it professional.
-- End with a call to action or engaging question.
-- Include 2-4 relevant hashtags.
-- Ensure each tweet stays under the 280-character mental model (be concise).
-
----
-TRANSCRIPT:
-{transcript}
----
-
-CRUCIAL RULE: Write the entire response in {language}.
-
-Generate the Twitter post/thread now:""",
-)
-
-YTSHORT_PROMPT = PromptTemplate(
-    input_variables=["transcript", "language"],
-    template="""You are an expert YouTube Shorts scriptwriter and content summarizer.
-
-Below is the transcript of a YouTube video. Based on its content, extract the most 
-engaging, high-retention main points to create a compelling **YouTube Short script**.
-
-STRICT GUIDELINES:
-- Start with a highly engaging Hook (the first 3 seconds of the short).
-- Extract 3-4 punchy, high-value main points from the video.
-- Keep sentences short, fast-paced, and easy to speak.
-- Add ideas for B-Roll or visual cues in brackets, e.g., [Show graphic of X].
-- End with a strong Call to Action (CTA).
-- DO NOT write a blog or article. This should look like a video script.
-- Keep the total word count under 150 words.
-
----
-TRANSCRIPT:
-{transcript}
----
-
-CRUCIAL RULE: Write the entire response in {language}.
-
-Generate the YouTube Short script now:""",
-)
-
-TED_TALK_PROMPT = PromptTemplate(
-    input_variables=["transcript", "language"],
-    template="""You are a world-class speech analyst and curator of "Ideas Worth Spreading."
-
-Below is the transcript of a YouTube video. Your goal is to distill the core message into a 
-compelling **TED Talk style summary**.
-
-Guidelines:
-- Start with the "Big Idea" (markdown H1)
-- Identify 3 "Takeaway Pillars": The most educational or inspirational points.
-- Use a narrative storytelling flow.
-- Include a "Call to Thought": A final challenge for the audience.
-- DO NOT write a blog post. No "In this video" intros. Keep it intellectual and inspiring.
-
----
-TRANSCRIPT:
-{transcript}
----
-
-CRUCIAL RULE: Write the entire response in {language}.
-
-Generate the TED Talk summary now:""",
-)
-
-INSTAGRAM_PROMPT = PromptTemplate(
-    input_variables=["transcript", "language"],
-    template="""You are an expert Instagram content creator who writes highly engaging captions.
-
-Below is the transcript of a YouTube video. Based on its content, craft a 
-compelling **Instagram caption**.
+compelling, high-energy **TikTok script**.
 
 STRICT RULES:
-- Start with an attention-grabbing hook in the first line.
-- Use spacing and line breaks to make it highly readable.
-- Extract 2-3 key takeaways or fascinating points from the transcript.
-- Add relevant emojis to break up text and add visual interest.
-- Include a clear Call to Action (e.g., "Save this post for later", "Link in bio", or a question).
-- End with 5-10 relevant hashtags.
-- THIS IS NOT A BLOG. Do not include a title. Just write the caption.
+- Start with a massive hook (0-3 seconds) to stop the scroll.
+- Use fast-paced, punchy dialogue or narration.
+- Include visual cues in brackets, e.g., [Fast cut to X], [Zoom in on face].
+- Add trending audio/vibe suggestions.
+- End with a clear, quick CTA (e.g., "Follow for part 2").
+- Keep it under 60 seconds of spoken time (roughly 120-150 words).
 
 ---
 TRANSCRIPT:
@@ -212,24 +134,23 @@ TRANSCRIPT:
 
 CRUCIAL RULE: Write the entire response in {language}.
 
-Generate the Instagram caption now:""",
+Generate the TikTok script now:""",
 )
 
-NEWSLETTER_PROMPT = PromptTemplate(
+FACEBOOK_PROMPT = PromptTemplate(
     input_variables=["transcript", "language"],
-    template="""You are a professional email marketer and newsletter author.
-
-Below is the transcript of a YouTube video. Based on its content, write an 
-engaging, high-value **Email Newsletter**.
+    template="""You are a social media manager for Facebook.
+    
+Below is the transcript of a YouTube video. Based on its content, craft an 
+engaging **Facebook post**.
 
 Guidelines:
-- Create a catchy, intriguing Subject Line at the top.
-- Open with a friendly, personal greeting and hook.
-- Structure the body of the email clearly, using brief paragraphs and bullet points for readability.
-- Share the core value, insights, or story from the video.
-- Write in a conversational, relatable tone as if writing to a friend.
-- Include a clear Call to Action (e.g., "Reply to this email", "Watch the full video here").
-- Sign off cleanly.
+- Write a slightly longer, more storytelling-focused post compared to Twitter.
+- Use a friendly, community-oriented tone.
+- Highlight 3 interesting facts or stories from the transcript.
+- Use emojis naturally to add personality.
+- End with a question to encourage comments and shares.
+- Include 3-5 relevant hashtags.
 
 ---
 TRANSCRIPT:
@@ -238,50 +159,22 @@ TRANSCRIPT:
 
 CRUCIAL RULE: Write the entire response in {language}.
 
-Generate the Email Newsletter now:""",
+Generate the Facebook post now:""",
 )
 
-MEDIUM_PROMPT = PromptTemplate(
+COMMUNITY_PROMPT = PromptTemplate(
     input_variables=["transcript", "language"],
-    template="""You are a top Medium.com writer who creates in-depth, thought-provoking articles.
-
-Below is the transcript of a YouTube video. Read it carefully and produce a 
-well-structured, engaging **Medium article** based on its content.
-
-Guidelines:
-- Start with a compelling title (use a markdown H1 heading) and an optional subtitle (H2).
-- Write a strong hook that draws the reader in emotionally or intellectually.
-- Organize the body with clear, evocative H2 subheadings.
-- Weave a narrative rather than just summarizing; add insightful commentary based on the provided facts.
-- Use formatting (bolding, italics, blockquotes) to highlight key points.
-- Conclude with a strong, lingering thought or takeaway.
-- Length: 800-1200 words if possible given the transcript length.
-
----
-TRANSCRIPT:
-{transcript}
----
-
-CRUCIAL RULE: Write the entire response in {language}.
-
-Generate the full Medium article now:""",
-)
-
-THREADS_PROMPT = PromptTemplate(
-    input_variables=["transcript", "language"],
-    template="""You are a professional Threads (Instagram) ghostwriter who creates viral, 
-conversational, and high-engagement threads.
-
+    template="""You are a YouTube Channel Manager specializing in Community Tab engagement.
+    
 Below is the transcript of a YouTube video. Based on its content, craft a 
-compelling **Threads series**.
+compelling **YouTube Community Post**.
 
 Guidelines:
-- Start with a strong, relatable hook that stops the scroll.
-- Use a conversational, "friends-chatting" tone (less formal than LinkedIn/Twitter).
-- Break the content into 5-8 short, punchy posts.
-- Use emojis naturally to convey emotion.
-- Include a "What do you think?" style question at the end to spark comments.
-- Keep it concise and mobile-friendly.
+- Create an "Inside Scoop" or "Did you know?" style post.
+- Summarize the most surprising or valuable part of the video in 2-3 short paragraphs.
+- Use a casual, direct tone as if speaking to subscribers.
+- Encourage a specific action (e.g., "Vote in the poll below", "Check out the full video").
+- End with an engaging question.
 
 ---
 TRANSCRIPT:
@@ -290,23 +183,23 @@ TRANSCRIPT:
 
 CRUCIAL RULE: Write the entire response in {language}.
 
-Generate the Threads series now:""",
+Generate the YouTube Community Post now:""",
 )
 
-PINTEREST_PROMPT = PromptTemplate(
+SUMMARY_PROMPT = PromptTemplate(
     input_variables=["transcript", "language"],
-    template="""You are a Pinterest marketing expert and SEO specialist.
+    template="""You are an expert SEO specialist and content summarizer.
+    
+Below is the transcript of a YouTube video. Based on its content, produce a 
+**Summary & SEO Keyword report**.
 
-Below is the transcript of a YouTube video. Based on its content, create a 
-**Pinterest Pin Title and Description**.
-
-Guidelines:
-- Create 3 distinct Pin Titles (attention-grabbing and keyword-rich).
-- Write an SEO-optimized Pin Description (up to 500 characters) that explains the value.
-- Use natural language but include high-search-volume keywords from the transcript.
-- Include a clear call to action (e.g., "Click to watch the full tutorial").
-- Add 5-10 relevant hashtags.
-- Suggest 3 ideas for "Text Overlay" to be used on the Pin image.
+STRICT STRUCTURE:
+1. **The Core Message** (1 sentence summary)
+2. **Executive Summary** (A detailed 150-200 word summary of the main arguments)
+3. **5 Key Takeaways** (Bullet points)
+4. **Primary SEO Keyword** (The most relevant high-volume search term)
+5. **10 Secondary SEO Keywords** (Comma-separated list)
+6. **Suggested Video Tags** (Optimized for YouTube search)
 
 ---
 TRANSCRIPT:
@@ -315,33 +208,7 @@ TRANSCRIPT:
 
 CRUCIAL RULE: Write the entire response in {language}.
 
-Generate the Pinterest content now:""",
-)
-
-QUORA_PROMPT = PromptTemplate(
-    input_variables=["transcript", "language"],
-    template="""You are a top-voted Quora contributor known for providing helpful, 
-detailed, and authoritative answers.
-
-Below is the transcript of a YouTube video. Based on its content, write a 
-**Quora-style answer** to a hypothetical relevant question.
-
-Guidelines:
-- Start by stating a common question this video answers.
-- Provide a detailed, well-structured answer based on the facts in the transcript.
-- Use a helpful, educational, and slightly personal tone.
-- Use bolding for key points and bullet points for readability.
-- Conclude with a helpful summary or "Final Tip".
-- DO NOT just summarize; provide value as if you are answering a real person.
-
----
-TRANSCRIPT:
-{transcript}
----
-
-CRUCIAL RULE: Write the entire response in {language}.
-
-Generate the Quora answer now:""",
+Generate the Summary & Keywords now:""",
 )
 
 # ---------------------------------------------------------------------------
@@ -359,6 +226,10 @@ medium_chain = MEDIUM_PROMPT | llm | output_parser
 threads_chain = THREADS_PROMPT | llm | output_parser
 pinterest_chain = PINTEREST_PROMPT | llm | output_parser
 quora_chain = QUORA_PROMPT | llm | output_parser
+tiktok_chain = TIKTOK_PROMPT | llm | output_parser
+facebook_chain = FACEBOOK_PROMPT | llm | output_parser
+community_chain = COMMUNITY_PROMPT | llm | output_parser
+summary_chain = SUMMARY_PROMPT | llm | output_parser
 
 # ---------------------------------------------------------------------------
 # Request / Response schemas
@@ -410,6 +281,22 @@ class PinterestResponse(BaseModel):
 class QuoraResponse(BaseModel):
     video_url: str
     quora_post: str
+
+class TikTokResponse(BaseModel):
+    video_url: str
+    tiktok_post: str
+
+class FacebookResponse(BaseModel):
+    video_url: str
+    facebook_post: str
+
+class CommunityResponse(BaseModel):
+    video_url: str
+    community_post: str
+
+class SummaryResponse(BaseModel):
+    video_url: str
+    summary_post: str
 
 # ---------------------------------------------------------------------------
 # Helper: fetch transcript with error handling
@@ -674,3 +561,55 @@ async def generate_quora(request: URLRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"LLM error while generating Quora answer: {e}")
     return QuoraResponse(video_url=request.url, quora_post=quora_post.strip())
+
+
+@app.post("/tiktok", response_model=TikTokResponse, tags=["Content Generation"])
+async def generate_tiktok(request: URLRequest):
+    """
+    Given a YouTube video URL, extract its transcript and generate a TikTok script.
+    """
+    transcript = fetch_transcript_safe(request.url)
+    try:
+        tiktok_post = tiktok_chain.invoke({"transcript": transcript, "language": request.language})
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"LLM error while generating TikTok: {e}")
+    return TikTokResponse(video_url=request.url, tiktok_post=tiktok_post.strip())
+
+
+@app.post("/facebook", response_model=FacebookResponse, tags=["Content Generation"])
+async def generate_facebook(request: URLRequest):
+    """
+    Given a YouTube video URL, extract its transcript and generate a Facebook post.
+    """
+    transcript = fetch_transcript_safe(request.url)
+    try:
+        facebook_post = facebook_chain.invoke({"transcript": transcript, "language": request.language})
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"LLM error while generating Facebook: {e}")
+    return FacebookResponse(video_url=request.url, facebook_post=facebook_post.strip())
+
+
+@app.post("/community", response_model=CommunityResponse, tags=["Content Generation"])
+async def generate_community(request: URLRequest):
+    """
+    Given a YouTube video URL, extract its transcript and generate a YouTube Community post.
+    """
+    transcript = fetch_transcript_safe(request.url)
+    try:
+        community_post = community_chain.invoke({"transcript": transcript, "language": request.language})
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"LLM error while generating Community Post: {e}")
+    return CommunityResponse(video_url=request.url, community_post=community_post.strip())
+
+
+@app.post("/summary", response_model=SummaryResponse, tags=["Content Generation"])
+async def generate_summary(request: URLRequest):
+    """
+    Given a YouTube video URL, extract its transcript and generate an SEO Summary report.
+    """
+    transcript = fetch_transcript_safe(request.url)
+    try:
+        summary_post = summary_chain.invoke({"transcript": transcript, "language": request.language})
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"LLM error while generating Summary: {e}")
+    return SummaryResponse(video_url=request.url, summary_post=summary_post.strip())

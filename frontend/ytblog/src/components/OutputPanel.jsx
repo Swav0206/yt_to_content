@@ -114,6 +114,27 @@ export default function OutputPanel({ result, mode, onReset }) {
       isProse: true,
       icon: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
     },
+    tiktok: {
+      label: "TikTok Script",
+      content: result.tiktok_post,
+      icon: "M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.9-.32-1.98-.23-2.81.31-.75.42-1.24 1.16-1.35 1.99-.28 1.35.74 2.68 2.09 2.81 1.05.06 2.1-.59 2.55-1.54.22-.48.25-1.03.26-1.56.02-3.93 0-7.85.01-11.78z"
+    },
+    facebook: {
+      label: "Facebook Post",
+      content: result.facebook_post,
+      icon: "M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1V12h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"
+    },
+    community: {
+      label: "Community Post",
+      content: result.community_post,
+      icon: "M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
+    },
+    summary: {
+      label: "SEO Summary",
+      content: result.summary_post,
+      isProse: true,
+      icon: "M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"
+    },
     linkedin: {
       label: "LinkedIn Post",
       content: result.linkedin_post,
@@ -129,6 +150,16 @@ export default function OutputPanel({ result, mode, onReset }) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
+  }
+
+  function handleDownload() {
+    const element = document.createElement("a");
+    const file = new Blob([content], {type: 'text/plain'});
+    element.href = URL.createObjectURL(file);
+    element.download = `${label.toLowerCase().replace(/\s+/g, '_')}_content.txt`;
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
   }
 
   return (
@@ -175,6 +206,18 @@ export default function OutputPanel({ result, mode, onReset }) {
                 Copy
               </>
             )}
+          </button>
+          {/* Download button */}
+          <button
+            id="download-btn"
+            onClick={handleDownload}
+            className="btn-ghost"
+            title="Download as .txt"
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4M7 10l5 5 5-5M12 15V3"/>
+            </svg>
+            Save
           </button>
           {/* Generate another */}
           <button

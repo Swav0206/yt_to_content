@@ -142,3 +142,55 @@ export async function generateQuora(url, language = "English") {
   }
   return res.json(); // { video_url, quora_post }
 }
+
+export const generateTikTok = async (url, language = "English") => {
+  const response = await fetch(`${API_BASE}/tiktok`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url, language }),
+  });
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.detail || "Failed to generate TikTok script");
+  }
+  return response.json();
+};
+
+export const generateFacebook = async (url, language = "English") => {
+  const response = await fetch(`${API_BASE}/facebook`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url, language }),
+  });
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.detail || "Failed to generate Facebook post");
+  }
+  return response.json();
+};
+
+export const generateCommunity = async (url, language = "English") => {
+  const response = await fetch(`${API_BASE}/community`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url, language }),
+  });
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.detail || "Failed to generate Community post");
+  }
+  return response.json();
+};
+
+export const generateSummary = async (url, language = "English") => {
+  const response = await fetch(`${API_BASE}/summary`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url, language }),
+  });
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.detail || "Failed to generate Summary report");
+  }
+  return response.json();
+};
